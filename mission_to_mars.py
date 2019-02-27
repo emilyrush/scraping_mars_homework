@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 from splinter import Browser
 import pandas as pd
+import time
 
 def scrape():
     # URL of page to be scraped
@@ -20,7 +21,6 @@ def scrape():
     # Find latest news blurb
     news_p = soup.find('div', class_="rollover_description_inner").text
     news_p
-    get_ipython().system('which chromedriver')
 
     # * Use splinter to navigate the site and find the image url for the current Featured Mars Image and assign the url string to a variable called `featured_image_url`.
     # * Make sure to find the image url to the full size `.jpg` image.
@@ -32,6 +32,7 @@ def scrape():
 
     featured_image = browser.find_by_id('full_image')
     featured_image.click()
+    time.sleep(5)
 
     more_info = browser.find_link_by_partial_text('more info')
     more_info.click()
@@ -43,10 +44,7 @@ def scrape():
     part_image_url = soupsearch.find('img', class_='main_image').get('src')
     featured_image_url = 'https://www.jpl.nasa.gov' + part_image_url
     featured_image_url
-
-
-
-
+    
     # Visit the Mars Weather twitter account [here](https://twitter.com/marswxreport?lang=en) 
     # and scrape the latest Mars weather tweet from the page. Save the tweet text for the weather
     # report as a variable called `mars_weather`.
@@ -92,9 +90,6 @@ def scrape():
     schiaparelli = browser.find_link_by_partial_text('Schiaparelli')
     schiaparelli.click()
 
-    # html = browser.html
-    # soupsearch = BeautifulSoup(html, 'html.parser')
-
     schiaparelli_url = soupsearch.find('img', class_='wide-image').get('src')
     schiaparelli_img_url = astrogeology_url + schiaparelli_url
 
@@ -106,9 +101,6 @@ def scrape():
     syrtis = browser.find_link_by_partial_text('Syrtis')
     syrtis.click()
 
-    # html = browser.html
-    # soupsearch = BeautifulSoup(html, 'html.parser')
-
     syrtis_url = soupsearch.find('img', class_='wide-image').get('src')
     syrtis_img_url = astrogeology_url + syrtis_url
 
@@ -117,9 +109,6 @@ def scrape():
 
     valles = browser.find_link_by_partial_text('Valles')
     valles.click()
-
-    # html = browser.html
-    # soupsearch = BeautifulSoup(html, 'html.parser')
 
     valles_url = soupsearch.find('img', class_='wide-image').get('src')
     valles_img_url = astrogeology_url + valles_url
@@ -136,4 +125,16 @@ def scrape():
         {"title": "Syrtis Major Hemisphere", "img_url": syrtis_img_url},
     ]
 
-    return(hemisphere_image_urls)
+    mars_data = {
+        "hemispheres": hemisphere_image_urls,
+        "news_p" : news_p,
+        "news_title" : news_title,
+        "featured_image_url": featured_image_url,
+        "mars_weather": mars_weather,
+        "mars_facts": mars_facts
+    }
+
+    return(mars_data)
+
+
+scrape()
