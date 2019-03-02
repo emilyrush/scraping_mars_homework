@@ -8,12 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
-    body {
-      background-color: white;
-    }
-    .border {
-      border-color: orangered;
-    }
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -25,23 +20,6 @@
     footer {
       background-color: #f2f2f2;
       padding: 25px;
-    }
-    table {
-      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-      border: white;
-      padding: 8px;
-      text-align: left;
-    }
-    h3 {
-      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;      
-    }
-    h4 {
-      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;      
-    }
-    p {
-      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
     }
   </style>
 </head>
@@ -66,34 +44,31 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1>What's the latest with Mars?</h1>      
-    <p><a href="{{mars_data.featured_image_url}}" alt="Featured Image">Click here for featured image</a></p>
+    <p>Scraping for Mars Data</p>
   </div>
 </div>
-<p><center><small>Featured image courtesy of <a href="https://www.jpl.nasa.gov">NASA Jet Propulsion Laboratory.</a></small></center></p>
 
 <div class="container-fluid bg-3 text-center">    
-  <div class="row border">
-    <div class="col-sm-4">
-      <h3>Some Facts</h3><hr> 
+  <h3>About</h3><br>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>Mars Facts</p> 
       {{mars_data.mars_facts | safe}}
-      <a href="https://space-facts.com/mars/">Learn more</a>
     </div>
-    <div class="col-sm-4"> 
-      <h3>Weather</h3><hr>
-      {{mars_data.mars_weather}}
-      <br><a href="https://twitter.com/MarsWxReport">Visit the (unofficial) Mars Weather Twitter</a>
+    <div class="col-sm-3"> 
+      <p>Mars Weather</p>
+      <img src="{{mars_data.hemisphere_image_urls}}" class="img-responsive" style="width:100%" alt="Cerberus Hemisphere">
     </div>
-    <div class="col-sm-4"> 
-      <h3>News from NASA</h3><hr>
-      <strong>{{mars_data.news_title}}</strong><br>
-      {{mars_data.news_p}}
-      <br><a href="https://mars.nasa.gov/news/">Read more</a>
+    <div class="col-sm-6"> 
+      <p>Latest News</p>
+      {{mars_data.news_title}}
+      <br> {{mars_data.mars_p}}
     </div>
   </div>
-</div><br>
+</div><br><br>
   
 <div class="container-fluid bg-3 text-center">    
-  <h3><a href="https://astrogeology.usgs.gov/">Mars' Hemispheres</a></h3><hr>
+  <h3>Mars Hemispheres</h3><br>
   <div class="row">
     <div class="col-sm-3">
       <p>Valles Marineris Hemisphere</p>
